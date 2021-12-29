@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/dooda/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/dooda/static/js/main.3d04bbcf.chunk.js",
-    "main.js.map": "/dooda/static/js/main.3d04bbcf.chunk.js.map",
+    "main.js": "/dooda/static/js/main.c8434520.chunk.js",
+    "main.js.map": "/dooda/static/js/main.c8434520.chunk.js.map",
     "runtime-main.js": "/dooda/static/js/runtime-main.0355f0d7.js",
     "runtime-main.js.map": "/dooda/static/js/runtime-main.0355f0d7.js.map",
     "static/js/2.8d2ae3bb.chunk.js": "/dooda/static/js/2.8d2ae3bb.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.0355f0d7.js",
     "static/js/2.8d2ae3bb.chunk.js",
     "static/css/main.6dea0f05.chunk.css",
-    "static/js/main.3d04bbcf.chunk.js"
+    "static/js/main.c8434520.chunk.js"
   ]
 }
