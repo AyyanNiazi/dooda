@@ -12,7 +12,7 @@ import { nftsBaseUrl } from 'views/Nft/market/constants'
 import useTheme from 'hooks/useTheme'
 import SearchBar from '../components/SearchBar'
 import Collections from './Collections'
-import Newest from './Newest'
+// import Newest from './Newest'
 import config from './config'
 
 const Gradient = styled(Box)`
@@ -83,7 +83,7 @@ const Home = () => {
         dividerPosition="top"
       >
         <Collections />
-        <Newest />
+        {/* <Newest /> */}
       </PageSection>
       <Gradient p="64px 0">
         <SectionsWithFoldableText header={t('FAQs')} config={config(t)} m="auto" />

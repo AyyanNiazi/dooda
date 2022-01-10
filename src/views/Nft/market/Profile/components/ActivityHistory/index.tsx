@@ -117,6 +117,7 @@ const ActivityHistory = () => {
 
   return (
     <Card>
+      is pb
       {sortedUserActivities.length === 0 && nftMetadata.length === 0 && activitiesSlice.length === 0 && !isLoading ? (
         <Flex p="24px" flexDirection="column" alignItems="center">
           <NoNftsImage />

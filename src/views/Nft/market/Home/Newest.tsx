@@ -58,8 +58,8 @@ const Newest: React.FC = () => {
           gridColumnGap="16px"
           gridTemplateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(2, 1fr)', 'repeat(4, 1fr)']}
         >
-          {nfts.map((nft) => {
-            const isPBCollection = nft.collectionAddress.toLowerCase() === pancakeBunniesAddress.toLowerCase()
+          {nfts.length > 0 && nfts.map((nft) => {
+            const isPBCollection = nft?.collectionAddress?.toLowerCase() === pancakeBunniesAddress.toLowerCase()
             const currentAskPrice =
               !isPBCollection && nft.marketData?.isTradable ? parseFloat(nft.marketData.currentAskPrice) : undefined
             return (

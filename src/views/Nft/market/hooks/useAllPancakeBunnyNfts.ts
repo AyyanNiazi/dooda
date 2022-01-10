@@ -21,28 +21,22 @@ const useAllPancakeBunnyNfts = (collectionAddress: string) => {
       // We merely request from API all available bunny ids with their metadata and query subgraph for lowest price and latest updates.
       const { data } = await getNftsFromCollectionApi(pancakeBunniesAddress)
       const bunnyIds = Object.keys(data)
-      const lowestPrices = await getAllPancakeBunniesLowestPrice(bunnyIds)
-      const latestUpdates = await getAllPancakeBunniesRecentUpdatedAt(bunnyIds)
-      const allBunnies: NftToken[] = bunnyIds.map((bunnyId) => {
+      // const lowestPrices = await getAllPancakeBunniesLowestPrice(bunnyIds)
+      // const latestUpdates = await getAllPancakeBunniesRecentUpdatedAt(bunnyIds)
+      const allBunnies: NftToken[] = data.map((token) => {
         return {
           // tokenId here is just a dummy one to satisfy TS. TokenID does not play any role in gird display below
-          tokenId: data[bunnyId].name,
-          name: data[bunnyId].name,
-          description: data[bunnyId].description,
+          tokenId: token.tokenId,
+          name: token.name,
+          description: token.description,
           collectionAddress: pancakeBunniesAddress,
-          collectionName: data[bunnyId].collection.name,
-          image: data[bunnyId].image,
-          attributes: [
-            {
-              traitType: 'bunnyId',
-              value: bunnyId,
-              displayType: null,
-            },
-          ],
-          meta: {
-            currentAskPrice: lowestPrices[bunnyId],
-            updatedAt: latestUpdates[bunnyId],
-          },
+          collectionName: token.collection.name,
+          image: token.image,
+          attributes: token.attributes,
+          // meta: {
+          //   currentAskPrice: lowestPrices[bunnyId],
+          //   updatedAt: latestUpdates[bunnyId],
+          // },
         }
       })
       setAllPancakeBunnyNfts(allBunnies)

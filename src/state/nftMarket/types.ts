@@ -229,12 +229,23 @@ export interface ApiSingleTokenData {
   tokenId?: string
 }
 
+export interface ApiNftToken {
+  collectionAddress: string
+  name: string
+  description: string
+  image: Image
+  collection: {
+    name: string
+  }
+  attributes?: NftAttribute[]
+  tokenId?: string
+}
 // Get tokens within collection
 // ${API_NFT}/collections/${collectionAddress}/tokens
 export interface ApiResponseCollectionTokens {
   total: number
   attributesDistribution: Record<string, number>
-  data: Record<string, ApiSingleTokenData>
+  data: ApiNftToken[]
 }
 
 // Get specific token data

@@ -73,8 +73,8 @@ export const getNftsFromCollectionApi = async (
   const requestPath = `${API_NFT}/collections/${collectionAddress}/tokens${
     !isPBCollection ? `?page=${page}&size=${size}` : ``
   }`
-
-  const res = await fetch(requestPath)
+  // below requestpath will be use 
+  const res = await fetch(`${API_NFT}/collections/${collectionAddress}/tokens`)
   if (res.ok) {
     const data = await res.json()
     return data

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { useAppDispatch } from 'state'
 import { pancakeBunniesAddress } from 'views/Nft/market/constants'
 import { isAddress } from 'utils'
-import { fetchCollection, fetchCollections, fetchNewPBAndUpdateExisting } from './reducer'
+import { fetchCollection, fetchCollections } from './reducer'
 import { State } from '../types'
 import { NftFilter, NftFilterLoadingState, NftToken, UserNftsState } from './types'
 
@@ -57,15 +57,15 @@ export const useFetchByBunnyIdAndUpdate = (bunnyId: string) => {
 
   // This fetches more bunnies when called
   const fetchMorePancakeBunnies = (orderDirection: 'asc' | 'desc') => {
-    dispatch(
-      fetchNewPBAndUpdateExisting({
-        bunnyId,
-        existingTokensWithBunnyId,
-        allExistingPBTokenIds,
-        existingMetadata,
-        orderDirection,
-      }),
-    )
+    // dispatch(
+    //   fetchNewPBAndUpdateExisting({
+    //     bunnyId,
+    //     existingTokensWithBunnyId,
+    //     allExistingPBTokenIds,
+    //     existingMetadata,
+    //     orderDirection,
+    //   }),
+    // )
   }
 
   return { isUpdatingPancakeBunnies, latestPancakeBunniesUpdateAt, fetchMorePancakeBunnies }

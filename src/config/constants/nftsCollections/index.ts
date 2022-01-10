@@ -1,11 +1,19 @@
 import { Collections, CollectionKey } from './types'
 
 const collections: Collections = {
+  // [CollectionKey.PANCAKE]: {
+  //   name: 'Pancake Bunnies',
+  //   slug: 'pancake-bunnies',
+  //   address: {
+  //     56: '0xDf7952B35f24aCF7fC0487D01c8d5690a60DBa07',
+  //     97: '0x60935F36e4631F73f0f407e68642144e07aC7f5E',
+  //   },
+  // },
   [CollectionKey.PANCAKE]: {
     name: 'Pancake Bunnies',
     slug: 'pancake-bunnies',
     address: {
-      56: '0xDf7952B35f24aCF7fC0487D01c8d5690a60DBa07',
+      56: '0xE8D1063899f66f495fbd353392f009dA921c1B38',
       97: '0x60935F36e4631F73f0f407e68642144e07aC7f5E',
     },
   },

@@ -184,58 +184,58 @@ export const filterNftsFromCollection = createAsyncThunk<
  * 1. Update existing NFTs in the state in case some were sold or got price modified
  * 2. Fetch 30 more NFTs with specified bunny id
  */
-export const fetchNewPBAndUpdateExisting = createAsyncThunk<
-  NftToken[],
-  {
-    bunnyId: string
-    existingTokensWithBunnyId: string[]
-    allExistingPBTokenIds: string[]
-    existingMetadata: ApiSingleTokenData
-    orderDirection: 'asc' | 'desc'
-  }
->(
-  'nft/fetchNewPBAndUpdateExisting',
-  async ({ bunnyId, existingTokensWithBunnyId, allExistingPBTokenIds, existingMetadata, orderDirection }) => {
-    try {
-      // 1. Update existing NFTs in the state in case some were sold or got price modified
-      const [updatedNfts, updatedNftsMarket] = await Promise.all([
-        getNftsFromCollectionApi(pancakeBunniesAddress),
-        getMarketDataForTokenIds(pancakeBunniesAddress, allExistingPBTokenIds),
-      ])
+// export const fetchNewPBAndUpdateExisting = createAsyncThunk<
+//   NftToken[],
+//   {
+//     bunnyId: string
+//     existingTokensWithBunnyId: string[]
+//     allExistingPBTokenIds: string[]
+//     existingMetadata: ApiSingleTokenData
+//     orderDirection: 'asc' | 'desc'
+//   }
+// >(
+//   'nft/fetchNewPBAndUpdateExisting',
+//   async ({ bunnyId, existingTokensWithBunnyId, allExistingPBTokenIds, existingMetadata, orderDirection }) => {
+//     try {
+//       // 1. Update existing NFTs in the state in case some were sold or got price modified
+//       const [updatedNfts, updatedNftsMarket] = await Promise.all([
+//         getNftsFromCollectionApi(pancakeBunniesAddress),
+//         getMarketDataForTokenIds(pancakeBunniesAddress, allExistingPBTokenIds),
+//       ])
 
-      if (!updatedNfts?.data) {
-        return []
-      }
-      const updatedTokens = updatedNftsMarket.map((marketData) => {
-        const apiMetadata = getMetadataWithFallback(updatedNfts.data, marketData.otherId)
-        const attributes = getPancakeBunniesAttributesField(marketData.otherId)
-        return combineApiAndSgResponseToNftToken(apiMetadata, marketData, attributes)
-      })
+//       if (!updatedNfts?.data) {
+//         return []
+//       }
+//       const updatedTokens = updatedNftsMarket.map((marketData) => {
+//         const apiMetadata = getMetadataWithFallback(updatedNfts.data, marketData.otherId)
+//         const attributes = getPancakeBunniesAttributesField(marketData.otherId)
+//         return combineApiAndSgResponseToNftToken(apiMetadata, marketData, attributes)
+//       })
 
-      // 2. Fetch 30 more NFTs with specified bunny id
-      let newNfts = { data: { [bunnyId]: existingMetadata } }
+//       // 2. Fetch 30 more NFTs with specified bunny id
+//       const newNfts = { data: { [bunnyId]: existingMetadata } }
 
-      if (!existingMetadata) {
-        newNfts = await getNftsFromCollectionApi(pancakeBunniesAddress)
-      }
-      const nftsMarket = await getNftsByBunnyIdSg(bunnyId, existingTokensWithBunnyId, orderDirection)
+//       if (!existingMetadata) {
+//         // newNfts = await getNftsFromCollectionApi(pancakeBunniesAddress)
+//       }
+//       const nftsMarket = await getNftsByBunnyIdSg(bunnyId, existingTokensWithBunnyId, orderDirection)
 
-      if (!newNfts?.data) {
-        return updatedTokens
-      }
+//       if (!newNfts?.data) {
+//         return updatedTokens
+//       }
 
-      const moreTokensWithRequestedBunnyId = nftsMarket.map((marketData) => {
-        const apiMetadata = getMetadataWithFallback(newNfts.data, marketData.otherId)
-        const attributes = getPancakeBunniesAttributesField(marketData.otherId)
-        return combineApiAndSgResponseToNftToken(apiMetadata, marketData, attributes)
-      })
-      return [...updatedTokens, ...moreTokensWithRequestedBunnyId]
-    } catch (error) {
-      console.error(`Failed to update PancakeBunnies NFTs`, error)
-      return []
-    }
-  },
-)
+//       const moreTokensWithRequestedBunnyId = nftsMarket.map((marketData) => {
+//         // const apiMetadata = getMetadataWithFallback(newNfts.data, marketData.otherId)
+//         const attributes = getPancakeBunniesAttributesField(marketData.otherId)
+//         // return combineApiAndSgResponseToNftToken(apiMetadata, marketData, attributes)
+//       })
+//       return [...updatedTokens, ...moreTokensWithRequestedBunnyId]
+//     } catch (error) {
+//       console.error(`Failed to update PancakeBunnies NFTs`, error)
+//       return []
+//     }
+//   },
+// )
 
 export const fetchUserNfts = createAsyncThunk<
   NftToken[],
@@ -403,20 +403,20 @@ export const NftMarket = createSlice({
       }
       state.data.nfts[collectionAddress] = [...existingNftsWithoutNewOnes, ...action.payload]
     })
-    builder.addCase(fetchNewPBAndUpdateExisting.pending, (state) => {
-      state.data.loadingState.isUpdatingPancakeBunnies = true
-    })
-    builder.addCase(fetchNewPBAndUpdateExisting.fulfilled, (state, action) => {
-      if (action.payload.length > 0) {
-        state.data.nfts[pancakeBunniesAddress] = action.payload
-      }
-      state.data.loadingState.isUpdatingPancakeBunnies = false
-      state.data.loadingState.latestPancakeBunniesUpdateAt = Date.now()
-    })
-    builder.addCase(fetchNewPBAndUpdateExisting.rejected, (state) => {
-      state.data.loadingState.isUpdatingPancakeBunnies = false
-      state.data.loadingState.latestPancakeBunniesUpdateAt = Date.now()
-    })
+    // builder.addCase(fetchNewPBAndUpdateExisting.pending, (state) => {
+    //   state.data.loadingState.isUpdatingPancakeBunnies = true
+    // })
+    // builder.addCase(fetchNewPBAndUpdateExisting.fulfilled, (state, action) => {
+    //   if (action.payload.length > 0) {
+    //     state.data.nfts[pancakeBunniesAddress] = action.payload
+    //   }
+    //   state.data.loadingState.isUpdatingPancakeBunnies = false
+    //   state.data.loadingState.latestPancakeBunniesUpdateAt = Date.now()
+    // })
+    // builder.addCase(fetchNewPBAndUpdateExisting.rejected, (state) => {
+    //   state.data.loadingState.isUpdatingPancakeBunnies = false
+    //   state.data.loadingState.latestPancakeBunniesUpdateAt = Date.now()
+    // })
     builder.addCase(fetchUserNfts.rejected, (state) => {
       state.data.user.userNftsInitializationState = UserNftInitializationState.ERROR
     })

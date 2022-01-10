@@ -39,6 +39,7 @@ export const useGetCollectionDistributionPB = () => {
     const fetchTokens = async () => {
       setState((prevState) => ({ ...prevState, isFetching: true }))
       const apiResponse = await getCollectionDistributionApi<ApiCollectionDistributionPB>(pancakeBunniesAddress)
+      if(apiResponse)
       setState({
         isFetching: false,
         data: apiResponse.data,

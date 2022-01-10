@@ -11,7 +11,7 @@ import { pancakeBunniesAddress } from '../../constants'
 
 const CollectibleCardBody: React.FC<CollectibleCardProps> = ({ nft, nftLocation, currentAskPrice, isUserNft }) => {
   const { t } = useTranslation()
-  const { name, image } = nft
+  const { name, image, tokenId } = nft
   const bnbBusdPrice = useBNBBusdPrice()
   const isPancakeBunny = nft.collectionAddress?.toLowerCase() === pancakeBunniesAddress.toLowerCase()
   const { isFetching, lowestPrice } = useGetLowestPriceFromNft(nft)
@@ -28,7 +28,7 @@ const CollectibleCardBody: React.FC<CollectibleCardProps> = ({ nft, nftLocation,
         {nftLocation && <LocationTag nftLocation={nftLocation} />}
       </Flex>
       <Text as="h4" fontWeight="600" mb="8px">
-        {name}
+        {name} #{tokenId}
       </Text>
       <Box borderTop="1px solid" borderTopColor="cardBorder" pt="8px">
         {isPancakeBunny && (

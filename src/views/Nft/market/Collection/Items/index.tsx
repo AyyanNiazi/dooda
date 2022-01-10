@@ -18,7 +18,8 @@ const Items = () => {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const collection = useGetCollection(collectionAddress)
-  const isPBCollection = collectionAddress.toLowerCase() === pancakeBunniesAddress.toLowerCase()
+  // const isPBCollection = collectionAddress.toLowerCase() === pancakeBunniesAddress.toLowerCase()
+  const isPBCollection = true
 
   const { address } = collection || {}
 
@@ -42,6 +43,7 @@ const Items = () => {
       <Header collection={collection} />
       {isPBCollection ? (
         <Container mb="24px">
+          container
           <Flex alignItems="center" justifyContent={['flex-start', null, null, 'flex-end']} mb="24px">
             <Box minWidth="165px">
               <Text fontSize="12px" textTransform="uppercase" color="textSubtle" fontWeight={600} mb="4px">
